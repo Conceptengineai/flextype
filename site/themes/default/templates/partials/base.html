@@ -13,10 +13,12 @@
 
             <title>{% if entry.title %}{{ entry.title|e('html') }} | {% endif %}{{ registry.settings.title|e('html') }}</title>
 
-            <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
 
             {% set framework_css = base_url() ~ '/site/themes/' ~ registry.settings.theme ~ '/assets/dist/css/5lvmb3r.min.css' %}
+            {% set theme_css = base_url() ~ '/site/themes/' ~ registry.settings.theme ~ '/assets/src/theme.css' %}
             {% do assets.add('css', framework_css, 'site', 1) %}
+            {% do assets.add('css', theme_css, 'site', 2) %}
             {% for assets_site in assets.get('css', 'site') %}
                 {% for assets_by_priorities in assets_site %}
                     <link href="{{ assets_by_priorities.asset }}" rel="stylesheet">
@@ -27,67 +29,23 @@
             {{ snippets.exec('google-analytics')|raw }}
         {% endblock %}
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow">
-        <div class="container">
-          <a class="navbar-brand" href="{{ base_url() }}">{{ registry.settings.title|e('html') }}</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+    <body class="font-family-montserrat">
+        <nav class="flex items-center margin-4 fit">
+            <div class="flex">
+                <a class="padding-4 text-black text-6xl  bold uppercase" href="{{ base_url() }}">{{ registry.settings.title|e('html') }}</a>
+            </div>
+            <div class="flex">
                 {% for item in entries.fetchAll('', {'order_by': {'field': 'menu_item_order', 'direction': 'asc'}}) %}
                     {% if item.menu_item_title %}
-                        <li class="nav-item">
-                            <a class="nav-link {% if item.menu_item_url in entry.slug %}active{% endif %}" href="{{ base_url() }}/{{ item.menu_item_url }}">{{ item.menu_item_title }}</a>
-                        </li>
+                        <a class="padding-4 text-black {% if item.menu_item_url in entry.slug %}active{% endif %}" href="{{ base_url() }}/{{ item.menu_item_url }}">{{ item.menu_item_title }}</a>
                     {% endif %}
                 {% endfor %}
-            </ul>
-          </div>
-        </div>
-        </nav>
-        <main role="main" class="container content">
-            <div id="content">{% block content %}{% endblock %}</div>
-            <div class="powered">
-                {% block footer %}
-                    {{ tr('site_powered_by_flextype')|raw }}
-                {% endblock %}
             </div>
-        </main>
+        </nav>
 
-        {% set build_js = base_url() ~ '/site/themes/' ~ registry.settings.theme ~ '/assets/dist/js/build.min.js' %}
-        {% do assets.add('js', build_js, 'site', 1) %}
-        {% for assets_site in assets.get('js', 'site') %}
-            {% for assets_by_priorities in assets_site %}
-                <script src="{{ assets_by_priorities.asset }}"></script>
-            {% endfor %}
-        {% endfor %}
+        <div>
+            {% block content %}{% endblock %}
+        </div>
 
-        <script src="//cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/8.7.1/lazyload.min.js"></script>
-        <script src="//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-        <script src="//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-        <script type="text/javascript">
-
-        if ($('.gallery-grid a').length) {
-             var lightbox = $('.gallery-grid a').simpleLightbox({'fileExt': false});
-        }
-
-        if ($('.gallery-grid').length) {
-          var $grid = $('.gallery-grid').imagesLoaded()
-            .done( function( instance ) {
-               $('.preloader').hide();
-               $grid.masonry({
-                   visibleStyle: { transform: 'translateY(0)', opacity: 1 },
-                   hiddenStyle: { transform: 'translateY(100px)', opacity: 0 },
-               });
-            })
-            .progress( function( instance, image ) {
-
-            });
-        }
-        </script>
-
-        {{ emitter.emit('onThemeTail') }}
     </body>
 </html>
