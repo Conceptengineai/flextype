@@ -8,6 +8,16 @@
 .text-dim { color: var(--dimgray); }
 .text-black { color: var(--black); }
 
+.bg-transparent { background-color: transparent; }
+.bg-white { background-color: var(--white); }
+.bg-smoke { background-color: var(--whitesmoke); }
+.bg-light { background-color: var(--lightgray); }
+.bg-silver { background-color: var(--silver); }
+.bg-dark { background-color: var(--darkgray); }
+.bg-gray { background-color: var(--gray); }
+.bg-dim { background-color: var(--dimgray); }
+.bg-black { background-color: var(--black); }
+
 .ellipsis {
 	overflow: hidden;
 	max-width: 100%;
