@@ -1,7 +1,12 @@
 .text-transparent { color: transparent; }
-.text-white { color: #fff; }
-.text-black { color: #000; }
-.text-gray { color: #ccc; }
+.text-white { color: var(--white); }
+.text-smoke { color: var(--whitesmoke); }
+.text-light { color: var(--lightgray); }
+.text-silver { color: var(--silver); }
+.text-dark { color: var(--darkgray); }
+.text-gray { color: var(--gray); }
+.text-dim { color: var(--dimgray); }
+.text-black { color: var(--black); }
 
 .ellipsis {
 	overflow: hidden;
@@ -56,6 +61,7 @@
 :root {
     --normal: normal;
     --bold: bold;
+
 	--caps-letter-spacing: 1rem;
 	--text-sm: .75rem;
 	--text-base: 1rem;
@@ -66,4 +72,13 @@
 	--text-4xl: 2.25rem;
 	--text-5xl: 3rem;
 	--text-6xl: 4rem;
+
+	--white: white;
+	--whitesmoke: whitesmoke;
+	--lightgray: lightgray;
+	--silver: silver;
+	--darkgray: darkgray;
+	--gray: gray;
+	--dimgray: dimgray;
+	--black: black;
 }
