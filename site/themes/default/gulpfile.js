@@ -8,6 +8,7 @@ const rename = require("gulp-rename")
 const size = require("gulp-size")
 const stylelint = require("gulp-stylelint")
 const purgecss = require('gulp-purgecss')
+const concat = require('gulp-concat')
 
 const files = ["assets/src/framework/5lvmb3r.css"]
 const postcssVanilla = [postcssimport(), postcsscssnext({ browsers: [""] })]
@@ -60,20 +61,21 @@ const lint = () => gulp
 		stylelint({ reporters: [{ formatter: "string", console: true }] })
 	)
 
+// Build
+gulp.task("build-framework", gulp.series(defaultTask, buildVanilla, buildAutoprefixed));
 
-gulp.task('purgecss', () => {
+// Test
+gulp.task("test-framework", gulp.series(defaultTask, lint));
+
+// Build CSS
+gulp.task('build-css', () => {
   return gulp
-    .src('assets/dist/css/5lvmb3r.css')
+    .src(['assets/dist/css/5lvmb3r.prefixed.min.css', 'assets/src/theme.css'])
     .pipe(
       purgecss({
         content: ['templates/**/*.html']
       })
     )
-    .pipe(gulp.dest('assets/build/css'))
+	.pipe(concat('build.min.css'))
+    .pipe(gulp.dest('assets/build/css/'))
 })
-
-// Build
-gulp.task("build", gulp.series(defaultTask, buildVanilla, buildAutoprefixed));
-
-// Test
-gulp.task("test", gulp.series(defaultTask, lint));
