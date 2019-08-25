@@ -7,6 +7,7 @@ const postcssimport = require("postcss-import")
 const rename = require("gulp-rename")
 const size = require("gulp-size")
 const stylelint = require("gulp-stylelint")
+const purgecss = require('gulp-purgecss')
 
 const files = ["assets/src/framework/5lvmb3r.css"]
 const postcssVanilla = [postcssimport(), postcsscssnext({ browsers: [""] })]
@@ -58,6 +59,18 @@ const lint = () => gulp
 	.pipe(
 		stylelint({ reporters: [{ formatter: "string", console: true }] })
 	)
+
+
+gulp.task('purgecss', () => {
+  return gulp
+    .src('assets/dist/css/5lvmb3r.css')
+    .pipe(
+      purgecss({
+        content: ['templates/**/*.html']
+      })
+    )
+    .pipe(gulp.dest('assets/build/css'))
+})
 
 // Build
 gulp.task("build", gulp.series(defaultTask, buildVanilla, buildAutoprefixed));
