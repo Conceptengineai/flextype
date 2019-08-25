@@ -14,15 +14,16 @@
 .regular { font-weight: var(--normal); }
 .bold { font-weight: var(--bold); }
 
-.center { text-align: center; }
-.justify { text-align: justify; }
-.left { text-align: left; }
-.right { text-align: right; }
+.text-center { text-align: center; }
+.text-justify { text-align: justify; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
 
 .line-through,
 .delete { text-decoration: line-through; }
 .overline { text-decoration: overline; }
 .underline { text-decoration: underline; }
+.text-decoration-none { text-decoration: none; }
 
 .capitalize { text-transform: capitalize; }
 .lowercase { text-transform: lowercase; }
