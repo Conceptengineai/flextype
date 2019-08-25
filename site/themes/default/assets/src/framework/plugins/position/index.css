@@ -1,6 +1,8 @@
-.relative { position: relative; }
+.static { position: static; }
+.fixed { position: fixed; }
 .absolute { position: absolute; }
-.fixed    { position: fixed; }
+.relative { position: relative; }
+.sticky { position: sticky; }
 
 .top-0    { top: 0; }
 .right-0  { right: 0; }
@@ -15,6 +17,58 @@
 .z-50 { z-index: var(--z-50); }
 .z-auto { z-index: var(--z-auto); }
 
+@media (--breakpoint-sm) {
+    .static-sm { position: static; }
+    .fixed-sm { position: fixed; }
+    .absolute-sm { position: absolute; }
+    .relative-sm { position: relative; }
+    .sticky-sm { position: sticky; }
+
+    .top-sm-0    { top: 0; }
+    .right-sm-0  { right: 0; }
+    .bottom-sm-0 { bottom: 0; }
+    .left-sm-0   { left: 0; }
+}
+
+@media (--breakpoint-md) {
+    .static-md { position: static; }
+    .fixed-md { position: fixed; }
+    .absolute-md { position: absolute; }
+    .relative-md { position: relative; }
+    .sticky-md { position: sticky; }
+
+    .top-md-0    { top: 0; }
+    .right-md-0  { right: 0; }
+    .bottom-md-0 { bottom: 0; }
+    .left-md-0   { left: 0; }
+}
+
+@media (--breakpoint-lg) {
+    .static-lg { position: static; }
+    .fixed-lg { position: fixed; }
+    .absolute-lg { position: absolute; }
+    .relative-lg { position: relative; }
+    .sticky-lg { position: sticky; }
+
+    .top-lg-0    { top: 0; }
+    .right-lg-0  { right: 0; }
+    .bottom-lg-0 { bottom: 0; }
+    .left-lg-0   { left: 0; }
+}
+
+@media (--breakpoint-xl) {
+    .static-xl { position: static; }
+    .fixed-xl { position: fixed; }
+    .absolute-xl { position: absolute; }
+    .relative-xl { position: relative; }
+    .sticky-xl { position: sticky; }
+
+    .top-xl-0    { top: 0; }
+    .right-xl-0  { right: 0; }
+    .bottom-xl-0 { bottom: 0; }
+    .left-xl-0   { left: 0; }
+}
+
 :root {
   --z-0: 0;
   --z-10: 10;
@@ -24,3 +78,8 @@
   --z-50: 50;
   --z-auto: auto;
 }
+
+@custom-media --breakpoint-sm (max-width: 640px);
+@custom-media --breakpoint-md (max-width: 768px);
+@custom-media --breakpoint-lg (max-width: 1024px);
+@custom-media --breakpoint-xl (max-width: 1280px);
